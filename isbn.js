@@ -1,9 +1,9 @@
+require("dotenv").config();
 const Excel = require("exceljs");
 const axios = require("axios");
-// const fs = require("fs");
-// const https = require("https");
 
 const workbook = new Excel.Workbook();
+const apiKey = process.env.API_KEY;
 let isbnCollection = [],
   bookCollection = [],
   isbn;
@@ -23,7 +23,8 @@ const readMyFile = async () => {
 };
 
 const getData = async (isbn) => {
-  const url = `http://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=details&format=json`;
+  // const url = `http://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=details&format=json`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${apiKey}`;
   let data;
   try {
     const response = await axios.get(url);
@@ -38,7 +39,6 @@ const findMyBooks = async () => {
   try {
     for (const isbn of isbnCollection) {
       const result = await getData(isbn);
-      console.log(result);
       bookCollection.push(result);
     }
   } catch (error) {
@@ -46,9 +46,16 @@ const findMyBooks = async () => {
   }
 };
 
-async function runWorkflow() {
+const runWorkflow = async () => {
   await readMyFile();
   await findMyBooks();
-}
+  for (const item of bookCollection) {
+    if (item["totalItems"] === 0) {
+      console.log("Book not found.");
+    } else {
+      console.log(item["items"][0]["volumeInfo"]["authors"][0]);
+    }
+  }
+};
 
 runWorkflow();
