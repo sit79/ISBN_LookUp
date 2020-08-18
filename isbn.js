@@ -38,6 +38,7 @@ const findMyBooks = async () => {
   try {
     for (const isbn of isbnCollection) {
       const result = await getData(isbn);
+      console.log(result);
       bookCollection.push(result);
     }
   } catch (error) {
@@ -48,7 +49,6 @@ const findMyBooks = async () => {
 async function runWorkflow() {
   await readMyFile();
   await findMyBooks();
-  console.log(bookCollection);
 }
 
 runWorkflow();
