@@ -1,0 +1,20 @@
+{
+  "name": "2020-books",
+  "version": "1.0.0",
+  "description": "Trying to collect info on books via some ISBN lookup.",
+  "main": "isbn.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "books",
+    "isbn"
+  ],
+  "author": "SIT",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "exceljs": "^4.1.1"
+  },
+  "devDependencies": {}
+}
