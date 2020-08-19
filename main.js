@@ -1,10 +1,11 @@
 const findMyBooks = require("./app/findMyBooks");
-const display = require("./app/display");
+const createResult = require("./app/createResult");
+const save = require("./app/save");
 
 const runWorkflow = async () => {
   const bookCollection = await findMyBooks();
-  display(bookCollection);
-  // TODO implement writing result to excel or csv file;
+  const readableResult = createResult(bookCollection);
+  save(readableResult);
 };
 
 runWorkflow();

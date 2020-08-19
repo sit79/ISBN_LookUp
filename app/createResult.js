@@ -1,4 +1,5 @@
-const display = (bookCollection) => {
+const createResult = (bookCollection) => {
+  let bookList = [];
   try {
     for (const item of bookCollection) {
       const lookUp = "ISBN:" + item.ISBN;
@@ -15,13 +16,14 @@ const display = (bookCollection) => {
         author = book.authors !== undefined ? book.authors[0]["name"] : "";
         date = book.publish_date;
       }
-      console.log(
-        `ISBN: ${isbn} | ${found} | Titel: ${title} | Autor: ${author} | Verlag: ${publisher} | Veröffentlicht: ${date}`
-      );
+      let bookResult = { isbn, found, title, author, publisher, date };
+      bookList.push(bookResult);
     }
   } catch (e) {
     console.log(e.name + "\n" + e.message);
   }
+
+  return bookList;
 };
 
-module.exports = display;
+module.exports = createResult;
