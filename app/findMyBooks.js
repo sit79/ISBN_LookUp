@@ -14,8 +14,8 @@ const findMyBooks = async () => {
       );
       bookCollection.push(modResult);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e.name + "\n" + e.message);
   }
   return bookCollection;
 };
