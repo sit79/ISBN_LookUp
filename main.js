@@ -4,7 +4,7 @@ const save = require("./app/save");
 
 const runWorkflow = async () => {
   const bookCollection = await findMyBooks();
-  const readableResult = createResult(bookCollection);
+  const readableResult = await createResult(bookCollection);
   save(readableResult);
 };
 
