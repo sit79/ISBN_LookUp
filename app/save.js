@@ -6,8 +6,8 @@ const save = async (readableResult) => {
   // Save to file:
   await csv.toDisk("./result/books.csv");
 
-  // Return the CSV file as string if needed
-  // console.log(await csv.toString());
+  // Return the result as table of strings if needed
+  console.table(await readableResult);
 };
 
 module.exports = save;
