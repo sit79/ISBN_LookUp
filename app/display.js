@@ -1,19 +1,22 @@
 const display = (bookCollection) => {
   for (const item of bookCollection) {
-    if (!item["Not Found"]) {
-      try {
-        let lookUp = "ISBN:" + item.ISBN;
-        let book = item[lookUp];
-        let title = book.title;
-        let publisher = book.publishers[0]["name"];
-        let author = book.authors !== undefined ? book.authors[0]["name"] : "";
-        console.log(
-          `Titel: ${title} | Autor: ${author} | Verlag: ${publisher}`
-        );
-      } catch (error) {
-        console.log(error);
-      }
+    const lookUp = "ISBN:" + item.ISBN;
+    const book = item[lookUp];
+    const isbn = item.ISBN;
+    const found = item["found"];
+    let title = "";
+    let publisher = "";
+    let author = "";
+    let date = "";
+    if (found) {
+      title = book.title;
+      publisher = book.publishers[0]["name"];
+      author = book.authors !== undefined ? book.authors[0]["name"] : "";
+      date = book.publish_date;
     }
+    console.log(
+      `ISBN: ${isbn} | ${found} | Titel: ${title} | Autor: ${author} | Verlag: ${publisher} | Veröffentlicht: ${date}`
+    );
   }
 };
 

@@ -6,15 +6,12 @@ const findMyBooks = async () => {
   try {
     for (const isbn of isbnCollection) {
       let result = await getData(isbn);
-      let modResult;
-      if (Object.keys(result).length === 0) {
-        modResult = Object.assign(
-          { ISBN: isbn.toString() },
-          { "Not Found": true }
-        );
-      } else {
-        modResult = Object.assign({ ISBN: isbn.toString() }, result);
-      }
+      let exists = Object.keys(result).length !== 0;
+      const modResult = Object.assign(
+        { ISBN: isbn.toString() },
+        { found: exists },
+        exists ? result : null
+      );
       bookCollection.push(modResult);
     }
   } catch (error) {
