@@ -3,8 +3,9 @@ const getData = require("./getData");
 
 const findMyBooks = async () => {
   let bookCollection = [];
+  const isbnWithoutDuplicates = Array.from(new Set(isbnCollection));
   try {
-    for (const isbn of isbnCollection) {
+    for (const isbn of isbnWithoutDuplicates) {
       let result = await getData(isbn);
       let exists = Object.keys(result).length !== 0;
       const modResult = Object.assign(
