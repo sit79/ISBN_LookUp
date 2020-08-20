@@ -1,7 +1,6 @@
-const isbnCollection = require("./data");
 const getData = require("./getData");
 
-const findMyBooks = async () => {
+const findMyBooks = async (isbnCollection) => {
   let bookCollection = [];
   const isbnWithoutDuplicates = Array.from(new Set(isbnCollection));
   try {
