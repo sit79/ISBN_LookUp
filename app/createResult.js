@@ -11,10 +11,11 @@ const createResult = (bookCollection) => {
       let author = "";
       let date = "";
       if (found) {
-        title = book.title;
-        publisher = book.publishers[0]["name"];
+        title = book.title !== undefined ? book.title : "";
+        publisher =
+          book.publishers !== undefined ? book.publishers[0]["name"] : "";
         author = book.authors !== undefined ? book.authors[0]["name"] : "";
-        date = book.publish_date;
+        date = book.publish_date !== undefined ? book.publish_date : "";
       }
       let bookResult = { isbn, found, title, author, publisher, date };
       bookList.push(bookResult);
