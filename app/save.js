@@ -1,13 +1,17 @@
 const ObjectsToCsv = require("objects-to-csv");
 
 const save = async (readableResult) => {
-  const csv = new ObjectsToCsv(readableResult);
+  const notFound = readableResult.filter((item) => !item.found);
+  const found = readableResult.filter((item) => item.found);
+
+  const allBooks = new ObjectsToCsv(readableResult);
+  const notFoundBooks = new ObjectsToCsv(notFound);
+  const foundBooks = new ObjectsToCsv(found);
 
   // Save to file:
-  await csv.toDisk("./result/books.csv");
-
-  //TODO save two files: file1 contains finds,
-  // file2 contains books that could not be found
+  await allBooks.toDisk("./result/allBooks.csv");
+  await foundBooks.toDisk("./result/found.csv");
+  await notFoundBooks.toDisk("./result/notFound.csv");
 
   // Return the result as table of strings if needed
   console.table(await readableResult);
