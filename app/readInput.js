@@ -1,14 +1,11 @@
-const neatCsv = require("neat-csv");
 const fs = require("fs");
 
-const readInput = () => {
-  fs.readFile("./input/input.csv", async (err, data) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log(await neatCsv(data));
-  });
+const generateInputArray = (path) => {
+  const inputString = fs.readFileSync(path, { encoding: "utf-8" }).toString();
+  const inputArray = inputString
+    .split("\r\n")
+    .filter((item) => item !== "ISBN");
+  return inputArray;
 };
 
-module.exports = readInput;
+module.exports = generateInputArray;

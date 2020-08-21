@@ -6,7 +6,8 @@ const report = require("./app/report");
 const save = require("./app/save");
 
 const runWorkflow = async () => {
-  const isbnCollection = readInput();
+  const path = "./input/input.csv";
+  const isbnCollection = await readInput(path);
   const bookCollection = await findMyBooks(isbnCollection);
   const readableResult = await createResult(bookCollection);
   await save(readableResult);
